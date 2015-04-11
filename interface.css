@@ -1,0 +1,31 @@
+#drawing-dialog.dialog .editor .extended-toolbar {
+  min-height: 30px;
+  margin-bottom: 5px;
+  font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans","Helvetica Neue",Helvetica,sans-serif;
+}
+
+#drawing-dialog.dialog .editor .extended-toolbar  input:not(:first-child),
+#drawing-dialog.dialog .editor .extended-toolbar  select:not(:first-child) {
+  margin-left: 5px;
+}
+
+#drawing-dialog.dialog .editor .extended-toolbar  label {
+  display: initial;
+}
+
+#drawing-dialog.dialog .editor .extended-toolbar  input[type=color]{
+  width: 20px;
+}
+
+#drawing-dialog.dialog .dialog-body .editor .whiteboard-text-input {
+  margin-top: 75px;
+}
+
+#drawing-dialog.dialog .toolbar:first-child {
+  margin-top: 35px;
+}
+
+#drawing-dialog.dialog .editor .extended-toolbar #font-family {
+  height: 27px;
+  font-family:  'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'Helvetica Neue', Helvetica, sans-serif;
+}
