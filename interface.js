@@ -45,6 +45,8 @@ function setToolbarMode(mode) {
   switch (mode) {
     case MODES.STROKE:
       $('#stroke-color').show();
+      $('#stroke-width-label').show();
+      $('#stroke-width').show();
       break;
     case MODES.TEXT:
       $('#stroke-color').show();
@@ -56,6 +58,8 @@ function setToolbarMode(mode) {
       $('#fill-color').show();
       $('#fill').show();
       $('#fill-label').show();
+      $('#stroke-width-label').show();
+      $('#stroke-width').show();
       break;
   }
 }
@@ -65,6 +69,13 @@ function getExtendedData(mode) {
   switch (mode) {
     case MODES.STROKE:
       result.stroke = $('#stroke-color').val();
+      try {
+        var strokewidth = parseInt($('#stroke-width').val(), 10);
+      } catch(e) {
+        var strokewidth = 1;
+        $('#stroke-width').val('1');
+      }
+      result['stroke-width'] = strokewidth;
       break;
     case MODES.TEXT:
       result.fill = $('#stroke-color').val();
@@ -85,6 +96,13 @@ function getExtendedData(mode) {
       } else {
         delete result.fill
       }
+      try {
+        var strokewidth = parseInt($('#stroke-width').val(), 10);
+      } catch(e) {
+        var strokewidth = 1;
+        $('#stroke-width').val('1');
+      }
+      result['stroke-width'] = strokewidth;
       break;
   }
   return result;
@@ -118,6 +136,12 @@ function createExtendedToolbar() {
     .attr('id', 'fill-label')
     .attr('for', 'fill')
     .text('Fill');
+  var stroke_width_label = $(document.createElement('label'))
+    .attr('id', 'stroke-width-label')
+    .attr('for', 'stroke-width')
+    .text('Width');
+  var stroke_width = createInput('stroke-width', 'number')
+    .attr('min', '1').attr('max', '72').val('1');
   var fill_picker = createInput('fill-color', 'color');
   var font_picker = createFontSelect('font-family', FONTS);
   var font_size = createInput('font-size', 'number')
@@ -129,6 +153,8 @@ function createExtendedToolbar() {
     .append(fill_checkbox)
     .append(fill_label)
     .append(fill_picker)
+    .append(stroke_width_label)
+    .append(stroke_width)
     .append(font_picker)
     .append(font_size);
 
@@ -182,7 +208,7 @@ function modifyDrawingDialog(dialog) {
     setToolbarMode(MODES.SELECT);
   });
   dialog.find('.pencil').click(function() {
-    setToolbarMode(MODES.STROKE);
+    setToolbarMode(MODES.FILL);
   });
   dialog.find('.text').click(function() {
     setToolbarMode(MODES.TEXT);
@@ -196,7 +222,7 @@ function modifyDrawingDialog(dialog) {
   dialog.find('.ellipse').click(function() {
     setToolbarMode(MODES.FILL);
   });
-  setToolbarMode(MODES.STROKE);
+  setToolbarMode(MODES.FILL);
   
   dialog.find('.actions .insert').click(function() {
     var drawings = getDrawingIds($('#reply-body').val());

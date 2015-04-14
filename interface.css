@@ -5,7 +5,8 @@
 }
 
 #drawing-dialog.dialog .editor .extended-toolbar  input:not(:first-child),
-#drawing-dialog.dialog .editor .extended-toolbar  select:not(:first-child) {
+#drawing-dialog.dialog .editor .extended-toolbar  select:not(:first-child),
+#drawing-dialog.dialog .editor .extended-toolbar  #stroke-width-label {
   margin-left: 5px;
 }
 
